@@ -1,0 +1,24 @@
+/*Header*/
+header{
+    position: sticky;
+    top : 0;
+    z-index: 1000;
+    background-color: beige;
+    box-shadow: bisque;
+}
+
+
+.header_img{
+    height: 64px;
+    width: 64px;
+} 
+
+/*Footer*/
+
+footer{
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgb(168, 231, 155);
+    box-shadow: rgb(168, 231, 155);
+}
