@@ -1,5 +1,5 @@
 from enum import Enum
-from .Mark import Mark
+from .Mark import Mark,Test_Results
 
 class TestStates(Enum):
     Draft = 0
@@ -15,24 +15,17 @@ class Test:
         self.subj = teacher.subj
         self.students = students if students else []
         self.state = TestStates.Draft.value
-        self.marks = {}
-    
-    def add_student(self, student):
-        if student not in self.students:
-            self.students.append(student)
-    
-    def unsubscribe(self, subscriber):
-        self.students.remove(subscriber)
+        self.test_results = {}
     
     def activate(self):
         if self.state == TestStates.Draft.value:
             self.state = TestStates.Active.value
             for student in self.students:
                 answer = student.test_activated(self.max_questions)
-                self.marks[student] = Mark(answer,self.subj)               
+                self.test_results[student] = Test_Results(answer,self.max_questions,self.subj)               
         self.state = TestStates.Completed.value
             
-    def add_mark(self):
+    def add_test_results(self):
         if self.state == TestStates.Completed.value:
             for student in self.students:
-                student.add_mark(self.marks[student])
+                student.add_test_results(self.test_results[student])
