@@ -5,6 +5,9 @@ class Mark:
     value: int
     subj: str
     
+    def __repr__(self):
+        return f"Предмет: {self.subj}.Результат:{self.value}."
+    
 @dataclass(frozen=True)
 class Test_Results:
     gained: int

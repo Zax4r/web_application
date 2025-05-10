@@ -8,7 +8,7 @@
 {% block content %}
     <h1>Добавить новый тест</h1>
     <form action="/tests" method="POST">
-        <label for="title">Название теста
+        <label for="title">Название теста</label>
         <input type="text" id="title" name="title" required><br><br>
 
         <label for="max_questions">Кол-во вопросов</label>
@@ -21,7 +21,7 @@
             {% endfor %}
         </select><br><br>
 
-        <input type="submit" value="Add test">
+        <input type="submit" value="Добавить">
     </form>
 
 
@@ -29,6 +29,7 @@
 
 <div>
     {% for test in tests %}
+    <div class = 'test'>
         <li>{{test.title}}
         {% if test.is_draft %}
                 Готова к нажатию
@@ -36,6 +37,7 @@
                 Проверить
             {% endif %}
             </li>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

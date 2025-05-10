@@ -1,8 +1,11 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template, redirect
 from domain.TestingSystem import TestingSystem
+import domain.utils as utils
+
 
 app = Flask(__name__)
-testing_system = TestingSystem()
+loaded_system = utils.load()
+testing_system = loaded_system if loaded_system else TestingSystem()
 
 @app.route('/tests', methods=['GET', 'POST'])
 def tests():
@@ -16,8 +19,8 @@ def tests():
             print(e)
         
     
-    teachers = testing_system.all_teachers
-    tests = testing_system.all_tests
+    teachers = testing_system.teachers
+    tests = testing_system.tests
     return render_template('tests.html', teachers=teachers,tests=tests)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,8 +34,14 @@ def teachers():
         except Exception as e:
             print(e)
 
-    teachers = testing_system.all_teachers
+    teachers = testing_system.teachers
     return render_template('teachers.html',teachers=teachers)
+
+@app.route('/save')
+def save():
+    utils.save(testing_system)
+    return redirect('/')
+    
 
 @app.route('/students',methods = ['GET','POST'])
 def students():
@@ -40,7 +49,7 @@ def students():
         name = request.form['name']
         testing_system.add_student(name)    
     
-    students = testing_system.all_students
+    students = testing_system.students
     return render_template("students.html",students=students)
 
 if __name__ == '__main__':
