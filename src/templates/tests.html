@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Тесты
+{% endblock %}
+
+
+{% block content %}
+    <h1>Добавить новый тест</h1>
+    <form action="/tests" method="POST">
+        <label for="title">Название теста
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="max_questions">Кол-во вопросов</label>
+        <input type="number" id="max_questions" name="max_questions" required><br><br>
+
+        <label for="teacher_index">Выбрать учителя:</label>
+        <select id="teacher_index" name="teacher_index" required>
+            {% for teacher in teachers %}
+                <option value="{{ loop.index0 }}">{{ teacher.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Add test">
+    </form>
+
+
+    <h1>Тесты</h1>
+
+<div>
+    {% for test in tests %}
+        <li>{{test.title}}
+        {% if test.is_draft %}
+                Готова к нажатию
+            {% else %}      
+                Проверить
+            {% endif %}
+            </li>
+    {% endfor %}
+</div>
+{% endblock %}

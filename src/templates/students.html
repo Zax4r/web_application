@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Студенты
+{% endblock %}
+
+
+{% block content %}
+    <h1>Добавить студента</h1>
+    <form action="/students" method="POST">
+        <label for="name">Имя студента:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <input type="submit" value="Добавить студента">
+    </form>
+
+    {% for student in students %}
+        <div>
+            {{ student.name }}<br><br>
+            
+            <details> <summary>Результаты теста</summary>
+            <span>
+            {% for test_results in student.test_results %}
+                <li>test_results</li>
+            {% endfor %}
+            </span>
+            </details>
+        </div>
+    {% endfor %}
+{% endblock %}

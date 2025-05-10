@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Учителя
+{% endblock %}
+
+
+{% block content %}
+    <h1>Добавление нового учителя</h1>
+    <form action="/teachers" method="POST">
+        <label for="name">Имя учителя:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="subj">Преподаваемый предмет:</label>
+        <input name = 'subj' id='subj' required><br><br>
+
+        <input type="submit" value="Добавить">
+    </form>
+{% endblock %}

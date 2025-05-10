@@ -8,8 +8,8 @@ class Teacher:
         self.name = name
         self.subj = subj
            
-    def create_test(self,title,students,max_questions):
-        return Test(title,self,max_questions,students)
+    def create_test(self,title,max_questions):
+        return Test(title,self,max_questions)
     
     def convert_test_results(self,test_results:Test_Results):
         value = round(test_results.gained/test_results.max_possible)
