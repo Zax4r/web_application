@@ -29,9 +29,14 @@ def activate(test_index):
     testing_system.add_test_results(test_index)
     return redirect('/tests')
 
+@app.route('/tests/<int:test_index>/convert', methods=['POST'])
+def convert(test_index):
+    testing_system.convert_test_results(test_index)
+    return redirect('/tests')
+
 @app.route('/tests/<int:test_index>/check', methods=['POST'])
 def check(test_index):
-    testing_system.convert_test_results(test_index)
+    testing_system.put_marks(test_index)
     return redirect('/tests')
 
 @app.route('/tests/<int:test_index>/delete', methods=['POST'])

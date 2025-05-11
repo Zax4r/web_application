@@ -30,17 +30,46 @@
 <div>
     {% for test in tests %}
     <div class = 'list_element'>
-        <li>{{test.title}}
+        {{test.title}} ({{test.max_questions}} вопроса)
             {% if test.is_draft %}
             <form action="/tests/{{ loop.index0 }}/activate" method="POST" style="display:inline;">
                 <input type="submit" value="Активировать">
             </form>
-            {% else %}      
-            <form action="/tests/{{ loop.index0 }}/check" method="POST" style="display:inline;">
-                <input type="submit" value="Проверить">
+            {% elif test.is_tested %}  
+            <form action="/tests/{{ loop.index0 }}/convert" method="POST" style="display:inline;">
+                <input type="submit" value="Конвертировать">
             </form>
+                
+            <details> 
+                <summary>Результаты</summary>
+    
+                <span>
+                {% for student,test_result in test.test_results.items() %}
+    
+                    <li>{{ student.name }}: {{test_result}}</li>
+    
+                {% endfor %}
+                </span>
+            </details>
+
+            {% else %}
+            <form action="/tests/{{ loop.index0 }}/check" method="POST" style="display:inline;">
+                <input type="submit" value="Выставить">
+            </form>
+
+            <details> 
+                <summary>Результаты</summary>
+    
+                <span>
+                {% for student,mark in test.marks.items() %}
+    
+                    <li>{{ student.name }}: {{mark}}</li>
+    
+                {% endfor %}
+                </span>
+            </details>
+
             {% endif %} 
-            </li>
             <form class = 'deletion' action="/tests/{{ loop.index0 }}/delete" method="POST" style="display:inline;">
                 <input type="submit" value="Удалить">
             </form>

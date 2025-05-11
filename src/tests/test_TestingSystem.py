@@ -30,6 +30,7 @@ class test_Testing_System(unittest.TestCase):
         self.assertEqual(len(student2.list_marks()),0)
         
         system.convert_test_results(0)
+        system.put_marks(0)
         
         self.assertEqual(len(student1.list_test_results()),1)
         self.assertEqual(len(student1.list_marks()),1)

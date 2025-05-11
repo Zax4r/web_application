@@ -54,6 +54,9 @@ h1 {
 
 header{
     background-color:#FFD1C4;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 details {
