@@ -77,3 +77,14 @@ textarea {
     width: 100%; 
     box-sizing: border-box; 
 }
+
+
+.errormsg {
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+  }

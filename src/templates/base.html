@@ -29,6 +29,19 @@
        <a type="button" class="btn btn-outline-primary me-2" href="{{url_for('save')}}">Сохранить</a>
        </div> 
 </header>
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% if messages %}
+  <ul>
+    {% for category,msg in messages %}
+    
+    {% if category=='warning' %}
+      <div class="errormsg">{{ msg }}</div>
+    {% endif %}
+
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
 
     <div class = "content">
       {% block content %}{% endblock %}

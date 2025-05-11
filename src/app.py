@@ -1,22 +1,21 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, flash
 from domain.TestingSystem import TestingSystem
 import domain.utils as utils
 
 
 app = Flask(__name__)
+app.secret_key = "MYSECRETKEY"
+
 loaded_system = utils.load()
 testing_system = loaded_system if loaded_system else TestingSystem()
 
 @app.route('/tests', methods=['GET', 'POST'])
 def tests():
     if request.method == 'POST':
-        try:
-            title = request.form['title']
-            max_questions = int(request.form['max_questions'])
-            teacher_index = int(request.form['teacher_index'])
-            testing_system.add_test(title, max_questions, teacher_index)
-        except Exception as e:
-            print(e)
+        title = request.form['title']
+        max_questions = int(request.form['max_questions'])
+        teacher_index = int(request.form['teacher_index'])
+        testing_system.add_test(title, max_questions, teacher_index)
         
     
     teachers = testing_system.teachers
@@ -48,12 +47,13 @@ def delete_test(test_index):
 @app.route('/teachers',methods = ['GET','POST'])
 def teachers():
     if request.method == 'POST':
-        try:
-            name = request.form['name']
-            subj = request.form['subj']
+        
+        name = request.form['name'].strip()
+        subj = request.form['subj'].strip()
+        if utils.validate_name(name) and utils.validate_name(subj):
             testing_system.add_teacher(name,subj)
-        except Exception as e:
-            print(e)
+        else:
+            flash("Не должны содержать цифр",category='warning')
 
     teachers = testing_system.teachers
     return render_template('teachers.html',teachers=teachers)
@@ -87,7 +87,10 @@ def delete_review(review_index):
 def students():
     if request.method == "POST":
         name = request.form['name']
-        testing_system.add_student(name)    
+        if utils.validate_name(name):
+            testing_system.add_student(name)    
+        else:
+            flash("Имя не должно содержать цифр",category='warning')
     
     students = testing_system.students
     return render_template("students.html",students=students)

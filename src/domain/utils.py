@@ -12,3 +12,9 @@ def load():
             return pickle.load(f)
     except Exception as e:
         return None
+    
+def validate_name(name: str):
+    for i in name:
+        if i.isnumeric():
+            return False
+    return len(name)>0
