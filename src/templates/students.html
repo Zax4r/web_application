@@ -8,7 +8,7 @@
 
 {% block content %}
     <h1>Добавить студента</h1>
-    <form action="/students" method="POST">
+    <form action="/students" method="POST" class="adding" autocomplete="off">
         <label for="name">Имя студента:</label>
         <input type="text" id="name" name="name" required>
         <br><br>
@@ -18,15 +18,15 @@
     <h1>Студенты:</h1>
     <div>
     {% for student in students %}
-        <div class = "student">
+        <div class = "list_element">
             {{ student.name }}
             <details> 
-            <summary>Результаты теста</summary>
+            <summary>Результаты тестов</summary>
 
             <span>
             {% for test_results in student.test_results %}
 
-                <li>test_results</li>
+                <li>{{ test_results }}</li>
 
             {% endfor %}
             </span>
@@ -39,12 +39,15 @@
                 <span>
                 {% for mark in student.marks %}
     
-                    <li>mark</li>
+                    <li>{{ mark }}</li>
     
                 {% endfor %}
                 </span>
     
                 </details>
+            <form class = 'deletion' action="/students/{{ loop.index0 }}/delete" method="POST">
+            <input type="submit" value="Удалить">
+            </form>
         </div>
     {% endfor %}
     </div>

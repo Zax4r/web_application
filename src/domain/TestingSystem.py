@@ -34,9 +34,8 @@ class TestingSystem:
     def convert_test_results(self,index:int):
         try:
             test = self.tests[index]
-            teacher = test.creator
             for student,test_result in test.test_results.items():
-                mark = teacher.convert_test_results(test_result)
+                mark = test.convert_test_result_to_mark(test_result)
                 student.add_mark(mark)
             self.tests.remove(test)
         except Exception as e:
@@ -47,3 +46,15 @@ class TestingSystem:
         
     def list_reviews(self):
         return self.review_handler.list_reviews()
+    
+    def remove_test(self,index):
+        self.tests.pop(index)
+        
+    def remove_teacher(self,index):
+        self.teachers.pop(index)
+        
+    def remove_student(self,index):
+        self.students.pop(index)
+        
+    def remove_review(self,index):
+        self.review_handler.remove(index)

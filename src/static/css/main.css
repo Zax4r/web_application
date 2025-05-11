@@ -5,7 +5,7 @@ body {
     padding: 20px;
 }
 
-form {
+.adding {
     max-width: 800px;
     padding: 20px;
     margin: auto;
@@ -14,14 +14,29 @@ form {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.test{
-    background: #AEC4D0;
+
+.list_element {
+    position: relative;
+    background: floralwhite;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
     margin: 10px 0;
     transition: box-shadow 0.3s;
 }
+
+.deletion {
+    background-color: red;
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px; 
+}
+
+
+.list_element:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 .container {
     max-width: 800px;
@@ -49,28 +64,13 @@ summary {
     cursor: pointer;
     font-weight: bold;
 }
-.student {
-    background: floralwhite;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-    transition: box-shadow 0.3s;
+
+.textofreview { 
+    width: 100%; 
+    box-sizing:  border-box;
 }
 
-.student:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.teacher {
-    background: #BEDACB;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-    transition: box-shadow 0.3s;
-}
-
-.teacher:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+textarea {
+    width: 100%; 
+    box-sizing: border-box; 
 }

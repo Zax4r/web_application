@@ -9,11 +9,7 @@ class Teacher:
         self.subj = subj
            
     def create_test(self,title,max_questions):
-        return Test(title,self,max_questions)
-    
-    def convert_test_results(self,test_results:Test_Results):
-        value = round(test_results.gained/test_results.max_possible)
-        return Mark(value,test_results.subj)
+        return Test(title,self.subj,max_questions)
 
 class Student:
     def __init__(self, name):

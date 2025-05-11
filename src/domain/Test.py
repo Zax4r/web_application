@@ -8,11 +8,10 @@ class TestStates(Enum):
     
 
 class Test:
-    def __init__(self, title, teacher,max_questions):
+    def __init__(self, title, subj,max_questions):
         self.title = title
-        self.creator = teacher
         self.max_questions = max_questions
-        self.subj = teacher.subj
+        self.subj = subj
         self.state = TestStates.Draft.value
         self.test_results = {}
     
@@ -29,6 +28,11 @@ class Test:
             for student in students:
                 if student in self.test_results.keys():
                     student.add_test_results(self.test_results[student])
+                    
+    
+    def convert_test_result_to_mark(self,test_result):
+        value = round(test_result.gained*10/test_result.max_possible)
+        return Mark(value,test_result.subj)
     
     @property
     def is_draft(self):

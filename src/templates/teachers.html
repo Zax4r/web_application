@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>Добавить нового учителя</h1>
-    <form action="/teachers" method="POST">
+    <form action="/teachers" method="POST" class="adding" autocomplete="off">
         <label for="name">Имя учителя:</label>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -20,8 +20,11 @@
     <h1>Учителя:</h1>
 
     {% for teacher in teachers %}
-        <div class="teacher">
+        <div class="list_element">
         {{teacher.name}}. По предмету: {{teacher.subj}}
+        <form class = 'deletion' action="/teachers/{{ loop.index0 }}/delete" method="POST" style="display:inline;">
+            <input type="submit" value="Удалить">
+        </form>
         </div>
     {% endfor %}
 

@@ -16,3 +16,6 @@ class ReviewHandler:
         
     def list_reviews(self):
         return self.reviews
+    
+    def remove(self,index):
+        self.reviews.pop(index)

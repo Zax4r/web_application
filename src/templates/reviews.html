@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Отзывы
+{% endblock %}
+
+
+{% block content %}
+    <h1>Добавить новый отзыв</h1>
+    <form action="/reviews" method="POST" class="adding" autocomplete="off">
+        <label for="author">Имя автора:</label>
+        <input type="text" id="author" name="author" required><br><br>
+
+        Текст отзыва:
+
+        <div class = 'textofreview'>
+        <textarea id="text" name="text" rows="5" required></textarea><br><br>
+    </div>
+        <input type="submit" value="Добавить">
+    </form>
+    
+    <h1>Отзывы:</h1>
+
+    {% for review in reviews %}
+        <div class="list_element">
+        {{review.author}}.<br><br>
+        <div class = 'textofreview'>
+        {{review.text}}
+        </div>
+        <form class = 'deletion' action="/reviews/{{ loop.index0 }}/delete" method="POST" style="display:inline;">
+            <input type="submit" value="Удалить">
+        </form>
+        </div>
+    {% endfor %}
+
+{% endblock %}
