@@ -84,6 +84,8 @@ textarea {
   right: 20px;
   z-index: 1000;
   max-width: 400px;
+  min-width: 200px;
+  margin: 20px auto; /* Центрирование по горизонтали и отступ сверху */
     background-color: #fff3cd;
     color: #856404;
     border-left: 4px solid #ffc107;
